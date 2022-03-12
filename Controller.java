@@ -19,11 +19,11 @@ class Controller implements ActionListener, MouseListener, KeyListener
 		this.model = m;
 	}
 
+	//control actions
 	void setView(View v){
 		this.view = v;
 	}
 
-	//control actions
 	public void actionPerformed(ActionEvent e)
 	{
 		this.view.removeButton();
