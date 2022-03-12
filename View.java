@@ -13,15 +13,19 @@ class View extends JPanel
 	BufferedImage turtle_image;
 	Model model;
 
+	// initialize all the tree members
 	View(Controller c, Model m)
 	{
+		//add a new button to panel
 		b1 = new JButton("I love Jesus!");
 		c.setView(this);
 		b1.addActionListener(c);
 		this.add(b1);
 
-		model = m;
+		//pass model to member reference
+		this.model = m;
 
+		//initialize turtle image
 		try
 		{
 			this.turtle_image =

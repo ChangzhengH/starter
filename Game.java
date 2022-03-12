@@ -20,6 +20,8 @@ public class Game extends JFrame
 		this.setVisible(true);
 
 		this.addMouseListener(controller);
+		this.addKeyListener(controller);
+
 	}
 
 	public static void main(String[] args)

@@ -13,13 +13,13 @@ class Model
 	{
 		// Move the turtle
 		if(this.turtle_x < this.dest_x)
-			this.turtle_x += 1;
+			this.turtle_x += Math.min(4,this.dest_x - this.turtle_x);
 		else if(this.turtle_x > this.dest_x)
-			this.turtle_x -= 1;
+			this.turtle_x -= Math.min(4,this.turtle_x - this.dest_x);
 		if(this.turtle_y < this.dest_y)
-			this.turtle_y += 1;
+			this.turtle_y += Math.min(4,this.dest_y - this.turtle_y);
 		else if(this.turtle_y > this.dest_y)
-			this.turtle_y -= 1;
+			this.turtle_y -= Math.min(4,this.turtle_y - this.dest_y);
 	}
 
 	public void setDestination(int x, int y)
