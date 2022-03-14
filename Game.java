@@ -11,7 +11,7 @@ public class Game extends JFrame
 	{
 		this.model = new Model();
 		this.controller = new Controller(model);
-		this.view = new View(controller,model);
+		this.view = new View(model);
 		this.setTitle("Turtle attack!");
 		this.setSize(500, 500);
 		this.setFocusable(true);

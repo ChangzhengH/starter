@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-class Controller implements ActionListener, MouseListener, KeyListener
+//Controller is nothing but just a controller, it has only logic related to control something in a former that implements all kinds of listeners
+class Controller implements  MouseListener, KeyListener
 {
-	View view;
 	Model model;
 	boolean keyLeft;
 	boolean keyRight;
@@ -19,23 +19,12 @@ class Controller implements ActionListener, MouseListener, KeyListener
 		this.model = m;
 	}
 
-	//control actions
-	void setView(View v){
-		this.view = v;
-	}
-
-	public void actionPerformed(ActionEvent e)
-	{
-		this.view.removeButton();
-	}
-
-
 
 
 	//control mouse clicks
 	public void mousePressed(MouseEvent e)
 	{
-		model.setDestination(e.getX(), e.getY());
+		model.createOrRemoveTube(e.getX(), e.getY());
 	}
 
 	public void mouseReleased(MouseEvent e) {    }
@@ -74,10 +63,10 @@ class Controller implements ActionListener, MouseListener, KeyListener
 
 	void update()
 	{
-		if(keyRight) model.dest_x++;
-		if(keyLeft) model.dest_x--;
-		if(keyDown) model.dest_y++;
-		if(keyUp) model.dest_y--;
+		if(keyRight) ;
+		if(keyLeft) ;
+		if(keyDown) ;
+		if(keyUp) ;
 	}
 
 

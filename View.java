@@ -9,28 +9,18 @@ import java.awt.Color;
 
 class View extends JPanel
 {
-	JButton b1;
-	BufferedImage turtle_image;
 	Model model;
+	BufferedImage tube_image;
 
-	// initialize all the tree members
-	View(Controller c, Model m)
+	View(Model m)
 	{
-		//add a new button to panel
-		b1 = new JButton("I love Jesus!");
-		c.setView(this);
-		b1.addActionListener(c);
-		this.add(b1);
-
 		//pass model to member reference
 		this.model = m;
 
-		//initialize turtle image
-		try
-		{
-			this.turtle_image =
-				ImageIO.read(new File("turtle.png"));
-		} catch(Exception e) {
+		//initialize tube image
+		try{
+			tube_image = ImageIO.read(new File("tube.png"));
+		} catch(Exception e){
 			e.printStackTrace(System.err);
 			System.exit(1);
 		}
@@ -41,13 +31,13 @@ class View extends JPanel
 	{
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.drawImage(this.turtle_image, model.turtle_x, model.turtle_y, null);
-	}
 
-	void removeButton(){
-		this.remove(b1);
-		this.repaint();
-	}
+		for(int i = 0; i < model.tubes.size(); i++)
+		{
+			Tube t = model.tubes.get(i);
+			g.drawImage(tube_image, t.xPosition, t.yPosition, null);
+		}
 
+	}
 
 }

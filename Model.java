@@ -1,30 +1,33 @@
+import java.util.ArrayList;
+
 class Model
 {
-	int turtle_x;
-	int turtle_y;
-	int dest_x;
-	int dest_y;
+	ArrayList<Tube> tubes;
 
 	Model()
 	{
+        tubes = new ArrayList<Tube>();
 	}
 
 	public void update()
 	{
-		// Move the turtle
-		if(this.turtle_x < this.dest_x)
-			this.turtle_x += Math.min(4,this.dest_x - this.turtle_x);
-		else if(this.turtle_x > this.dest_x)
-			this.turtle_x -= Math.min(4,this.turtle_x - this.dest_x);
-		if(this.turtle_y < this.dest_y)
-			this.turtle_y += Math.min(4,this.dest_y - this.turtle_y);
-		else if(this.turtle_y > this.dest_y)
-			this.turtle_y -= Math.min(4,this.turtle_y - this.dest_y);
+
 	}
 
-	public void setDestination(int x, int y)
+	//controller calls it and pass x-y position to it. The logic is to remove a existing tube or create a new one
+	public void createOrRemoveTube(int x, int y)
 	{
-		this.dest_x = x;
-		this.dest_y = y;
+		//before creating a tube, check if it clicked on an existing tube.If so, remove it and return not creating a tube
+		for(int i = 0; i < tubes.size(); i++){
+			Tube t = tubes.get(i);
+			if(t.isClicked(x,y))
+			{
+				tubes.remove(i);
+				return;
+			}
+		}
+		//create a tube and put it in ArrayList
+        Tube t = new Tube(x,y);
+        tubes.add(t);
 	}
 }
