@@ -9,16 +9,22 @@ import java.awt.event.KeyEvent;
 class Controller implements  MouseListener, KeyListener
 {
 	Model model;
+	View view;
 	boolean keyLeft;
 	boolean keyRight;
 	boolean keyUp;
 	boolean keyDown;
 
-	Controller(Model m)
+	Controller(Model m, View v)
+	{
+		this.model = m;
+		this.view = v;
+	}
+
+	void setModel(Model m)
 	{
 		this.model = m;
 	}
-
 
 
 	//control mouse clicks
@@ -44,6 +50,17 @@ class Controller implements  MouseListener, KeyListener
 			case KeyEvent.VK_UP: keyUp = true; break;
 			case KeyEvent.VK_DOWN: keyDown = true; break;
 		}
+
+		if(e.getKeyChar() == 's'){
+			this.model.marshal().save("map.json");
+		}
+
+		if(e.getKeyChar() == 'l'){
+			Model m = new Model(Json.load("map.json"));
+			this.view.setModel(m);
+			this.setModel(m);
+		}
+
 	}
 
 	public void keyReleased(KeyEvent e)
@@ -63,7 +80,7 @@ class Controller implements  MouseListener, KeyListener
 
 	void update()
 	{
-		if(keyRight) ;
+		if(keyRight) this.view.scrollPos += 5;
 		if(keyLeft) ;
 		if(keyDown) ;
 		if(keyUp) ;

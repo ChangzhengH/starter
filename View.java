@@ -11,6 +11,7 @@ class View extends JPanel
 {
 	Model model;
 	BufferedImage tube_image;
+	int scrollPos;
 
 	View(Model m)
 	{
@@ -26,6 +27,11 @@ class View extends JPanel
 		}
 	}
 
+	void setModel(Model m)
+	{
+		this.model = m;
+	}
+
 	//Override this method which is already in Jpanel
 	public void paintComponent(Graphics g)
 	{
@@ -35,7 +41,7 @@ class View extends JPanel
 		for(int i = 0; i < model.tubes.size(); i++)
 		{
 			Tube t = model.tubes.get(i);
-			g.drawImage(tube_image, t.xPosition, t.yPosition, null);
+			g.drawImage(tube_image, t.xPosition - this.scrollPos, t.yPosition, null);
 		}
 
 	}

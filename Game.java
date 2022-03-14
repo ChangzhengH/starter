@@ -10,10 +10,11 @@ public class Game extends JFrame
 	public Game()
 	{
 		this.model = new Model();
-		this.controller = new Controller(model);
 		this.view = new View(model);
-		this.setTitle("Turtle attack!");
-		this.setSize(500, 500);
+		this.controller = new Controller(this.model,this.view);
+
+		this.setTitle("Map Editor");
+		this.setSize(1500, 1000);
 		this.setFocusable(true);
 		this.getContentPane().add(view);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

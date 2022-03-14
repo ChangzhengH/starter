@@ -6,7 +6,23 @@ class Model
 
 	Model()
 	{
-        tubes = new ArrayList<Tube>();
+        this.tubes = new ArrayList<Tube>();
+	}
+
+	Model(Json ob){//unmarshaling constructor
+		Json tmpList = ob.get("tubes");
+		this.tubes = new ArrayList<Tube>();
+		for(int i = 0; i < tmpList.size(); i++)
+			this.tubes.add(new Tube(tmpList.get(i)));
+	}
+
+	Json marshal(){
+		Json ob = Json.newObject();
+		Json tmpList = Json.newList();
+		ob.add("tubes", tmpList);
+		for(int i = 0; i < this.tubes.size(); i++)
+			tmpList.add(this.tubes.get(i).marshal());
+		return ob;
 	}
 
 	public void update()
