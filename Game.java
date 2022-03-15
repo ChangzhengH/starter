@@ -20,7 +20,7 @@ public class Game extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 
-		this.addMouseListener(controller);
+		this.view.addMouseListener(controller);//attach mouse listener to JPanel
 		this.addKeyListener(controller);
 
 	}
