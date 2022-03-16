@@ -9,11 +9,11 @@ class Model
         this.tubes = new ArrayList<Tube>();
 	}
 
-	Model(Json ob){//unmarshaling constructor
-		Json tmpList = ob.get("tubes");
+	void unmarshal(Json ob){//unmarshaling from a Json object
+		Json jsonTubes = ob.get("tubes");
 		this.tubes = new ArrayList<Tube>();
-		for(int i = 0; i < tmpList.size(); i++)
-			this.tubes.add(new Tube(tmpList.get(i)));
+		for(int i = 0; i < jsonTubes.size(); i++)
+			this.tubes.add(new Tube(jsonTubes.get(i)));
 	}
 
 	Json marshal(){

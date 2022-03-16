@@ -56,9 +56,8 @@ class Controller implements  MouseListener, KeyListener
 		}
 
 		if(e.getKeyChar() == 'l'){
-			Model m = new Model(Json.load("map.json"));
-			this.view.setModel(m);
-			this.setModel(m);
+			Json loadedJson = Json.load("map.json");
+			this.model.unmarshal(loadedJson);
 		}
 
 	}
