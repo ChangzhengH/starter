@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 class Model
 {
@@ -29,6 +30,12 @@ class Model
 
 	public void update()
 	{
+		//notice this check must be before the update
+		if( isMarioOverlappedTube() ){
+			this.mario.goBackPrevPos();
+		}
+
+		this.mario.update();
 
 	}
 
@@ -47,5 +54,23 @@ class Model
 		//create a tube and put it in ArrayList
         Tube t = new Tube(x,y);
         tubes.add(t);
+	}
+
+	//detect whether or not mario overlapped a tube
+	boolean isMarioOverlappedTube(){
+
+		if( this.tubes.isEmpty() )//tubes为空自然是没有重合
+			return false;
+		for(Tube t : this.tubes){
+			if(this.mario.mario_x+ this.mario.width < t.xPosition)
+				return false;
+			if(this.mario.mario_x > t.xPosition+t.width)
+				return false;
+			if(this.mario.mario_y+ this.mario.height < t.yPosition) // assumes bigger is downward
+				return false;
+			if(this.mario.mario_y > t.yPosition+t.height) // assumes bigger is downward
+				return false;
+		}
+		return true;
 	}
 }

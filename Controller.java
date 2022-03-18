@@ -14,6 +14,7 @@ class Controller implements  MouseListener, KeyListener
 	boolean keyRight;
 	boolean keyUp;
 	boolean keyDown;
+	boolean keySpace;
 
 	Controller(Model m, View v)
 	{
@@ -31,6 +32,7 @@ class Controller implements  MouseListener, KeyListener
 	public void mousePressed(MouseEvent e)
 	{
 		model.createOrRemoveTube(e.getX()+this.view.scrollPos, e.getY());
+		System.out.println("you just clicked: x:"+e.getX()+",y:"+e.getY());
 	}
 
 	public void mouseReleased(MouseEvent e) {    }
@@ -49,6 +51,7 @@ class Controller implements  MouseListener, KeyListener
 			case KeyEvent.VK_LEFT: keyLeft = true; break;
 			case KeyEvent.VK_UP: keyUp = true; break;
 			case KeyEvent.VK_DOWN: keyDown = true; break;
+			case KeyEvent.VK_SPACE:keySpace = true;break;
 		}
 
 		if(e.getKeyChar() == 's'){
@@ -70,6 +73,7 @@ class Controller implements  MouseListener, KeyListener
 			case KeyEvent.VK_LEFT: keyLeft = false; break;
 			case KeyEvent.VK_UP: keyUp = false; break;
 			case KeyEvent.VK_DOWN: keyDown = false; break;
+			case KeyEvent.VK_SPACE:	keySpace = false; break;
 		}
 	}
 
@@ -81,13 +85,20 @@ class Controller implements  MouseListener, KeyListener
 	{
 		if(keyRight) {
 			this.view.scrollPos += 5;
-			this.model.mario.rollFrame();
+			this.model.mario.moveForward();
+			this.model.mario.rollForwardFrame();
 		}
 		if(keyLeft) {
 			this.view.scrollPos -= 5;
+			this.model.mario.moveBackward();
+			this.model.mario.rollBackwardFrame();
 		};
 		if(keyDown) ;
 		if(keyUp) ;
+
+		if(keySpace){
+			this.model.mario.jump();
+		}
 	}
 
 

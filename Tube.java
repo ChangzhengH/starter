@@ -1,9 +1,10 @@
-
+import java.awt.image.BufferedImage;
 
 class Tube{
 
     int xPosition;
     int yPosition;
+    static BufferedImage tube_image;
 
     final int width = 55;
     final int height = 400;
@@ -11,7 +12,10 @@ class Tube{
     //when creating a tube, make it slightly different from what it gets from mouse click
     Tube(int x, int y){
         this.xPosition = x;
-        this.yPosition = y;// the real solution would be attaching mouse listener to the JPanel which is View, but not JFrame which is the Game. But I am happy with what I have for now
+        this.yPosition = y;
+
+        if(tube_image==null)
+            tube_image = View.loadImage("tube.png");
     }
 
     //Unmarshaling constructor
