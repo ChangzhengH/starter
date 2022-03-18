@@ -1,3 +1,5 @@
 *.class
 *.json
+/.idea
+
 /starter.iml
