@@ -30,7 +30,7 @@ class Controller implements  MouseListener, KeyListener
 	//control mouse clicks
 	public void mousePressed(MouseEvent e)
 	{
-		model.createOrRemoveTube(e.getX(), e.getY());
+		model.createOrRemoveTube(e.getX()+this.view.scrollPos, e.getY());
 	}
 
 	public void mouseReleased(MouseEvent e) {    }
@@ -79,8 +79,13 @@ class Controller implements  MouseListener, KeyListener
 
 	void update()
 	{
-		if(keyRight) this.view.scrollPos += 5;
-		if(keyLeft) ;
+		if(keyRight) {
+			this.view.scrollPos += 5;
+			this.model.mario.rollFrame();
+		}
+		if(keyLeft) {
+			this.view.scrollPos -= 5;
+		};
 		if(keyDown) ;
 		if(keyUp) ;
 	}

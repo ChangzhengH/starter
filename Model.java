@@ -3,10 +3,12 @@ import java.util.ArrayList;
 class Model
 {
 	ArrayList<Tube> tubes;
+	Mario mario;
 
 	Model()
 	{
         this.tubes = new ArrayList<Tube>();
+        this.mario = new Mario(100,200);
 	}
 
 	void unmarshal(Json ob){//unmarshaling from a Json object
