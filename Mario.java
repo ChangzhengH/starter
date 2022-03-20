@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Mario{
 
@@ -8,6 +9,7 @@ public class Mario{
     int prev_y;
     final int width = 55;
     final int height = 96;
+    int standGround;//所站之处的Y值
 
     static BufferedImage[] mario_images;
 
@@ -17,6 +19,7 @@ public class Mario{
 
     Mario(int x, int y){
 
+        this.standGround = 500;
         this.mario_x = x;
         this.mario_y = y;
         this.frame = 0;
@@ -56,23 +59,30 @@ public class Mario{
 
     void update()//keep adding vert_vel, and y position adds the value of vert_vel, so it will falling more and more quickly
     {
-        savePrevPos();
-        this.frameCountOffGround++;//if it stands on the ground, this count will be set 0,so it only increments when it's away from ground
-        if(this.mario_y > 500 && this.vert_vel > 0.0)
-        {
-            this.vert_vel = 0.0;
-            this.mario_y = 500; // snap back to the ground
-            this.frameCountOffGround = 0;
-        }
-
-        vert_vel += 1.2;
-        this.mario_y += vert_vel;
+        fall();
+        stand(this.standGround);
     }
 
     void jump(){
         if(this.frameCountOffGround < 5){//the jump has a limit
             this.vert_vel -= 5.0;
         }
+    }
+
+    void stand(int ground_y){//test whether it stands on something
+        if(this.mario_y > ground_y )
+        {
+            this.vert_vel = 0.0;
+            this.mario_y = ground_y; // snap back to the ground
+            this.frameCountOffGround = 0;
+        }else{
+            this.frameCountOffGround++;//if it stands on the ground, this count will be set 0,so it only increments when it's away from ground
+        }
+    }
+
+    void fall(){
+        vert_vel += 1.2;
+        this.mario_y += vert_vel;
     }
 
     void savePrevPos(){
@@ -91,5 +101,30 @@ public class Mario{
 
     void moveBackward(){
         this.mario_x -= 20;
+    }
+
+
+    //detect whether or not mario overlapped a tube
+    boolean isOverlappedByTube(List<Tube> tubes){
+
+        if( tubes.isEmpty() )//tubes为空自然是没有重合
+            return false;
+        for(Tube t : tubes){
+            if(this.mario_x+ this.width < t.xPosition)
+                return false;
+            if(this.mario_x > t.xPosition+t.width)
+                return false;
+            if(this.mario_y+ this.height < t.yPosition) // assumes bigger is downward
+            {
+                return false;
+            }else {
+                this.standGround = t.yPosition;
+            }
+            if(this.mario_y > t.yPosition+t.height) // assumes bigger is downward
+                return false;
+        }
+
+
+        return true;
     }
 }

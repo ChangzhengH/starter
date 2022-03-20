@@ -30,13 +30,14 @@ class Model
 
 	public void update()
 	{
-		//notice this check must be before the update
-		if( isMarioOverlappedTube() ){
+
+
+		//notice this check must be before the save
+		if( this.mario.isOverlappedByTube(tubes) ){
 			this.mario.goBackPrevPos();
 		}
-
+		this.mario.savePrevPos();
 		this.mario.update();
-
 	}
 
 	//controller calls it and pass x-y position to it. The logic is to remove a existing tube or create a new one
@@ -56,21 +57,5 @@ class Model
         tubes.add(t);
 	}
 
-	//detect whether or not mario overlapped a tube
-	boolean isMarioOverlappedTube(){
 
-		if( this.tubes.isEmpty() )//tubes为空自然是没有重合
-			return false;
-		for(Tube t : this.tubes){
-			if(this.mario.mario_x+ this.mario.width < t.xPosition)
-				return false;
-			if(this.mario.mario_x > t.xPosition+t.width)
-				return false;
-			if(this.mario.mario_y+ this.mario.height < t.yPosition) // assumes bigger is downward
-				return false;
-			if(this.mario.mario_y > t.yPosition+t.height) // assumes bigger is downward
-				return false;
-		}
-		return true;
-	}
 }
